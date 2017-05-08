@@ -1,4 +1,5 @@
 import time
+import sys
 #Valores padrões para lógica
 current=0
 score=0
@@ -15,35 +16,33 @@ def fizzbuzz(): #Define ao Programa o que é Fizz,Buzz,FizzBuzz e nada
             r=3
            if current%3!=0 and current%5!=0: #Nada
             r=0
-       else:
-            print('Game Over')
-            inicio=False
+def gameover(): #GameOver
+    if score < 0:
+        print('Game Over')
+        print(score)
+        inicio=False
+        sys.exit()
         
 def check(): #Checa se a resposta do usuário está correta e adiciona o score
        global score
        if lol=='Fizz' and r==1: 
            score+= 5
-       else:
-           if lol!='Fizz' and r==1:
-               score=score-10
+       elif lol!='Fizz' and r==1:
+            score-=10
 
        if lol=='Buzz' and r==2:
             score+= 5
-       else:
-           if lol!='Buzz' and r==2:
-               score=score-10
+       elif lol!='Buzz' and r==2:
+            score-=10
 
        if lol=='FizzBuzz' and r==3:
             score+= 5
-       else:
-           if lol!='FizzBuzz' and r==3:
-               score=score-10
+       elif lol!='FizzBuzz' and r==3:
+            score-=10
        if lol=='' and r==0:
             score+=5
-       else:
-           if lol!='' and r==0:
-               score=score-10
-
+       elif lol!='' and r==0:
+            score-=10
 
 #Tutorial
 print('Fizz - Números divisíveis por 3')
@@ -52,8 +51,10 @@ print('Buzz - Números divisíveis por 5')
 time.sleep(2)
 print('FizzBuzz - Números Divisíveis por 3 e 5')
 time.sleep(2)
+print(' ')
 print('Caso não seja nenhum dos três, deixe em branco')
 time.sleep(2)
+print(' ')
 inicio=True #Começa o jogo pós tutorial
 
 
@@ -62,7 +63,8 @@ while inicio==True: #Looping do jogo
     print('O número é '+str(current))
     lol = raw_input('Fizz,Buzz,FizzBuzz, ou nenhum(deixe em branco) ? ')
     fizzbuzz()
-    check()  
+    check()
+    gameover()
     print('Seu score é '+str(score))
     time.sleep(1)
     
