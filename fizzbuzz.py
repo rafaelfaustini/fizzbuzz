@@ -1,36 +1,27 @@
 import time
-
-inicio=False
-current=1
+#Valores padrões para lógica
+current=0
 score=0
+inicio=False #Não começa o jogo enquanto mostra o pequeno tutorial
 
-
-print('Fizz - NÃºmeros divisÃ­veis por 3')
-time.sleep(2)
-print('Buzz - NÃºmeros divisÃ­veis por 5')
-time.sleep(2)
-print('FizzBuzz - NÃºmeros DivisÃ­veis por 3 e 5')
-time.sleep(2)
-print('Caso nÃ£o seja nenhum dos trÃªs, deixe em branco')
-time.sleep(2)
-inicio=True
-
-
-
-while inicio==True:
-    print('O nÃºmero Ã© '+str(current))
-    lol = raw_input('Fizz,Buzz,FizzBuzz, ou nenhum(deixe em branco) ? ')
-    if score>=0:
-       if (current%3==0) and (current%5!=0): #Fizz
+def fizzbuzz(): #Define ao Programa o que é Fizz,Buzz,FizzBuzz e nada
+       if score>=0:
+           global r
+           if (current%3==0) and (current%5!=0): #Fizz
             r=1
-       if (current%3!=0) and (current%5==0): #Buzz 
+           if (current%3!=0) and (current%5==0): #Buzz 
             r=2
-       if (current%3==0) and (current%5==0): #FizzBuzz 
+           if (current%3==0) and (current%5==0): #FizzBuzz 
             r=3
-       if current%3!=0 and current%5!=0: #Nada
+           if current%3!=0 and current%5!=0: #Nada
             r=0
-
-       if lol=='Fizz' and r==1:
+       else:
+            print('Game Over')
+            inicio=False
+        
+def check(): #Checa se a resposta do usuário está correta e adiciona o score
+       global score
+       if lol=='Fizz' and r==1: 
            score+= 5
        else:
            if lol!='Fizz' and r==1:
@@ -52,13 +43,27 @@ while inicio==True:
        else:
            if lol!='' and r==0:
                score=score-10
-    else:
-        print('Game Over')
-        inicio=False
-    print(lol)    
-    print(r)    
-    print('Seu score Ã© '+str(score))
+
+
+#Tutorial
+print('Fizz - Números divisíveis por 3')
+time.sleep(2)
+print('Buzz - Números divisíveis por 5')
+time.sleep(2)
+print('FizzBuzz - Números Divisíveis por 3 e 5')
+time.sleep(2)
+print('Caso não seja nenhum dos três, deixe em branco')
+time.sleep(2)
+inicio=True #Começa o jogo pós tutorial
+
+
+while inicio==True: #Looping do jogo
+    current+= 1
+    print('O número é '+str(current))
+    lol = raw_input('Fizz,Buzz,FizzBuzz, ou nenhum(deixe em branco) ? ')
+    fizzbuzz()
+    check()  
+    print('Seu score é '+str(score))
     time.sleep(1)
-    current= current+1
     
     
